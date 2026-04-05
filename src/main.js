@@ -10,8 +10,18 @@ import {
   hideLoader,
   showLoadMoreButton,
   hideLoadMoreButton,
-  scrollToNewImages,
 } from './js/render-functions.js';
+
+function scrollToNewImages() {
+  const card = gallery.querySelector('.gallery-item');
+  if (card) {
+    const height = card.getBoundingClientRect().height;
+    window.scrollBy({
+      top: height * 2,
+      behavior: 'smooth',
+    });
+  }
+}
 
 const form = document.querySelector('.form');
 const btnLoadMore = document.querySelector('.load-more');
@@ -74,13 +84,14 @@ async function onSearch(event) {
 
 async function onLoadMore() {
   showLoader();
+  hideLoadMoreButton();
 
   try {
     const data = await getImagesByQuery(currentQuery, currentPage);
 
     if (data.hits.length === 0) {
       hideLoadMoreButton();
-      iziToast.error({
+      iziToast.info({
         position: 'topRight',
         message: "We're sorry, there are no more images to load",
         messageColor: 'white',
@@ -96,6 +107,14 @@ async function onLoadMore() {
     const totalPages = Math.ceil(data.totalHits / limit);
     if (currentPage > totalPages) {
       hideLoadMoreButton();
+      iziToast.info({
+        position: 'topRight',
+        message: "We're sorry, but you have reached the end of search results.",
+        messageColor: 'white',
+        backgroundColor: 'blue',
+      });
+    } else {
+      showLoadMoreButton();
     }
   } catch (error) {
     iziToast.show({

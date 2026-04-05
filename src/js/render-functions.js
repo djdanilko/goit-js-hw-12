@@ -78,14 +78,3 @@ export function showLoadMoreButton() {
 export function hideLoadMoreButton() {
   btnLoadMore.classList.remove('is-visible');
 }
-
-export function scrollToNewImages() {
-  const card = gallery.querySelector('.gallery-item');
-  if (card) {
-    const height = card.getBoundingClientRect().height;
-    window.scrollBy({
-      top: height * 2,
-      behavior: 'smooth',
-    });
-  }
-}
