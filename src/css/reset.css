@@ -7,9 +7,7 @@ h6,
 p {
   margin: 0;
 }
-h1 {
-  margin: 0 auto;
-}
+
 h2 {
   font-size: 18px;
 }
@@ -75,6 +73,7 @@ body {
 .loader.is-visible {
   display: inline-block;
 }
+
 .loader::after {
   content: '';
   box-sizing: border-box;
@@ -110,8 +109,15 @@ body {
   }
 }
 
+.load-more {
+  display: none;
+}
+
+.load-more.is-visible {
+  display: block;
+}
+
 form {
-  margin: 0 auto;
   margin-bottom: 30px;
 }
 
