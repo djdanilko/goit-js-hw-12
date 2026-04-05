@@ -13,6 +13,7 @@ import {
 } from './js/render-functions.js';
 
 function scrollToNewImages() {
+  const gallery = document.querySelector('.gallery');
   const card = gallery.querySelector('.gallery-item');
   if (card) {
     const height = card.getBoundingClientRect().height;
@@ -67,6 +68,12 @@ async function onSearch(event) {
     const totalPages = Math.ceil(data.totalHits / limit);
     if (currentPage > totalPages) {
       hideLoadMoreButton();
+      iziToast.info({
+        position: 'topRight',
+        message: "We're sorry, but you have reached the end of search results.",
+        messageColor: 'white',
+        backgroundColor: 'blue',
+      });
     } else {
       showLoadMoreButton();
     }
